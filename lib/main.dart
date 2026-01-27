@@ -10,7 +10,6 @@ void main() async {
   await SharedPref.init();
   runApp(const FruitsApp());
 }
-
 class FruitsApp extends StatelessWidget {
   const FruitsApp({super.key});
   @override
