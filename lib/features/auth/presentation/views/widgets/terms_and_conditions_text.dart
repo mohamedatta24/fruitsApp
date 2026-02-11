@@ -4,47 +4,43 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_app/core/utils/app_images.dart';
 import 'package:fruits_app/core/utils/app_text_styles.dart';
 
-class TermsAndConditions extends StatefulWidget {
-  const TermsAndConditions({super.key});
+class TermsAndConditions extends StatelessWidget {
+  const TermsAndConditions({
+    super.key,
+    required this.onChanged,
+    required this.value,
+  });
 
-  @override
-  State<TermsAndConditions> createState() => _TermsAndConditionsState();
-}
-
-class _TermsAndConditionsState extends State<TermsAndConditions> {
-  bool isCheck = false;
+  final ValueChanged<bool> onChanged;
+  final bool value;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         GestureDetector(
-          onTap: () {
-            setState(() {
-              isCheck = !isCheck;
-            });
-          },
+          onTap: () => onChanged(!value),
           child: AnimatedContainer(
             duration: Duration(milliseconds: 200),
             width: 24.0,
             height: 24.0,
             decoration: BoxDecoration(
-              color: isCheck ? const Color(0xff1B5E37) : Colors.transparent,
+              color: value ? const Color(0xff1B5E37) : Colors.transparent,
               borderRadius: BorderRadius.circular(7.0),
               border: Border.all(
-                color: isCheck
+                color: value
                     ? const Color(0xff1B5E37)
                     : const Color(0xffDDDFDF),
                 width: 1.5,
               ),
             ),
 
-            child: isCheck
+            child: value
                 ? Center(child: SvgPicture.asset(Assets.imagesCheck))
                 : null,
           ),
         ),
-        const SizedBox(width: 15.0,),
+        const SizedBox(width: 15.0),
         Text(
           "من خلال إنشاء حساب ، فإنك توافق على ",
           style: AppTextStyles.semibold13.copyWith(
